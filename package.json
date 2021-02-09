@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.8",
+    "dotenv": "^8.2.0",
     "gatsby": "^2.26.1",
+    "gatsby-source-graphql": "^2.14.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
