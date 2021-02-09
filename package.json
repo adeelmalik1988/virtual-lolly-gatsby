@@ -19,7 +19,11 @@
     "gatsby": "^2.26.1",
     "gatsby-source-graphql": "^2.14.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "apollo-server-lambda": "^2.18.2",
+    "faunadb": "^4.0.3",
+    "graphql": "^14.1.1",
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "prettier": "2.2.1"
