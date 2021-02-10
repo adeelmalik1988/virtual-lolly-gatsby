@@ -14,13 +14,19 @@
 module.exports = {
   /* Your site config here */
   plugins: [
-    // {
-    //   resolve: "gatsby-source-graphql",
-    //   options: {
-    //     secret: process.env.FAUNA,
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "GETLOLLY",
+        
+        fieldName: "getLolly",
 
 
-    //   }
-    // }
+
+        url:"https://virtual-lolly-adeelmalik.netlify.app/.netlify/functions/newLolly"
+
+
+      }
+    }
   ],
 }

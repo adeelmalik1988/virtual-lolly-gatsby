@@ -6,7 +6,10 @@ import Lolly from "../component/Lolly"
 
 const GETDATA = gql`
     {    
-        hello
+        getLolly{
+            message
+            lollyPath
+        }
     }
 
 `
@@ -29,6 +32,7 @@ export default function CreateNew() {
     const senderRef = useRef()
     const { loading, error, data } = useQuery(GETDATA)
     const [createLolly] = useMutation(CREATELOLLYMUTATION)
+    !loading && console.log(data)
 
 
     const submitLollyForm = async () => {
@@ -59,7 +63,7 @@ export default function CreateNew() {
         <div className="container" >
 
             {
-                data && data.hello && <div>{data.hello}</div>
+                !loading && !error && <div>{JSON.stringify(data.getLolly)}</div>
             }
             <Header />
 
