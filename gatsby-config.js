@@ -16,9 +16,8 @@ module.exports = {
   plugins: [
     {
       resolve: "gatsby-source-graphql",
-      options: {
-        typeName: "GETLOLLY",
-        
+      options: {        
+        typeName: "getLolly",
         fieldName: "getLolly",
 
 

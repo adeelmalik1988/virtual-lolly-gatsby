@@ -1,6 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server-lambda')
 const faunadb = require("faunadb")
 const shortId = require("shortid")
+const axios = require("axios")
 require("dotenv").config()
 
 
@@ -64,10 +65,11 @@ const resolvers = {
       }
     }
 
-    },
-    Mutation: {
-      createLolly: async (_, args) => {
-        console.log(args)
+  },
+  Mutation: {
+    createLolly: async (_, args) => {
+      console.log(args)
+      try {
 
         const client = new faunadb.Client({
           secret: process.env.FAUNA
@@ -80,21 +82,35 @@ const resolvers = {
             data: args
           })
         )
+        // Calling Netlify Webhook to trigger build
+        axios.post("https://api.netlify.com/build_hooks/60241a0e5db2b10c964b2def", {})
+          .then(res => {
+            console.log(`statusCode, ${res.statusCode}`)
+            console.log(res)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        //
 
 
         console.log("result", result)
         console.log("result", result.data)
 
         return result.data
-
+      } catch (err) {
+        console.log(err)
       }
+
+
     }
   }
+}
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-  })
+  typeDefs,
+  resolvers,
+})
 
 const handler = server.createHandler()
 
