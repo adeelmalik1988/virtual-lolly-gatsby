@@ -41,12 +41,7 @@ export default function Lolly() {
 
 
 
-    if (loading) {
-        return (
-            <h2>Loading...</h2>
-        )
-
-    } else if (error) {
+    if (error) {
         return (
             <h2>{error}</h2>
         )
