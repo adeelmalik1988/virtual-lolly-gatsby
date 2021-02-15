@@ -25,7 +25,7 @@ const GETDATA = gql`
 
 
 export default function Lolly() {
-    const { data, loading, error, refetch } = useQuery(GETDATA)
+    const { data, loading, error } = useQuery(GETDATA)
     
     // useEffect(
     //     () => {
@@ -55,7 +55,7 @@ export default function Lolly() {
 
 
             <Router basepath="/lolly">
-                {
+                {!loading &&
                     data.getLolly.map((value, key) => (
                         <ShowLolly key={key} pageContext={value} path={`/${value.lollyPath}`} />
 
