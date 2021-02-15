@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Header from "../component/Header"
 import { Router } from "@reach/router"
 import ShowLolly from "../templates/showLolly"
@@ -26,6 +26,21 @@ const GETDATA = gql`
 
 export default function Lolly() {
     const { data, loading, error, refetch } = useQuery(GETDATA)
+    
+    // useEffect(
+    //     () => {
+    //         async function fetchData() {
+    //             await refetch()
+    //             console.log(data)
+    //         }
+
+    //         fetchData()
+    //     }
+    //      ,[]
+    // )
+
+
+
     if (loading) {
         return (
             <h2>Loading...</h2>
@@ -36,15 +51,18 @@ export default function Lolly() {
             <h2>{error}</h2>
         )
     }
+
     //refetch()
+    //  window.location.reload()
 
     return (
         <div>
 
+
             <Router basepath="/lolly">
                 {
-                    data.getLolly.map((value, key)=>(
-                        <ShowLolly  key={key} pageContext={value} path={`/${value.lollyPath}`} />
+                    data.getLolly.map((value, key) => (
+                        <ShowLolly key={key} pageContext={value} path={`/${value.lollyPath}`} />
 
                     ))
 
