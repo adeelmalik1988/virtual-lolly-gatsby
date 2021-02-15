@@ -11,6 +11,8 @@ export default function ShowLolly({ pageContext }) {
     return (
         <div>
             <Header />
+
+        <div className="showLollyDiv" >
             <Lolly fillLollyTop={showLollyData.flavourTop} fillLollyMiddle={showLollyData.flavourMedium} fillLollyBottom={showLollyData.flavourBottom} />
             <div>
                 <h2>{ showLollyData.recipientName }</h2>
@@ -22,6 +24,7 @@ export default function ShowLolly({ pageContext }) {
 
         </div>
 
+        </div>
     )
 
 }

@@ -22,7 +22,7 @@ exports.createPages = async function ({ graphql, actions }) {
 
       posts.map((post) => {
           actions.createPage({
-              path: post.lollyPath,
+              path: `/lolly/${post.lollyPath}`,
               component: require.resolve(`./src/templates/showLolly`),
               context: post,
           });
@@ -32,3 +32,14 @@ exports.createPages = async function ({ graphql, actions }) {
     console.log("End of Gatsby Node File");
 }
 
+exports.onCreatePage = async ({page, actions}) => {
+    const {createPage} =  actions
+
+    if(page.path.match(/^\/lolly/)){
+        page.matchPath = "/lolly/*"
+
+        createPage(page)
+
+    }
+
+}

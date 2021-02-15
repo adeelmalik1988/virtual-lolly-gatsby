@@ -57,3 +57,8 @@ body{
     justify-content: center;
     align-items: flex-start;
 }
+
+.showLollyDiv{
+    display: flex;
+    flex-direction: row;
+}

@@ -1,7 +1,12 @@
 import { useQuery, gql, useMutation } from "@apollo/client"
+import { navigate, Router } from "@reach/router"
 import React, { useRef, useState } from "react"
+import { render } from "react-dom"
 import Header from "../component/Header"
 import Lolly from "../component/Lolly"
+import ShowLolly from "../templates/showLolly"
+
+
 
 
 const GETDATA = gql`
@@ -16,8 +21,15 @@ const GETDATA = gql`
 const CREATELOLLYMUTATION = gql`
     mutation createLolly($recipientName: String!, $message: String!, $sender: String!, $flavourTop: String!, $flavourMedium: String!, $flavourBottom: String!){
       createLolly(recipientName: $recipientName, message: $message, sender: $sender, flavourTop: $flavourTop, flavourMedium: $flavourMedium, flavourBottom: $flavourBottom) {
+          
+          recipientName
           message
+          sender
+          flavourTop
+          flavourMedium
+          flavourBottom
           lollyPath
+
       }  
     }
 `
@@ -53,9 +65,14 @@ export default function CreateNew() {
                 flavourBottom: color3,
 
             }
+        }).then(result => {
+            navigate(`/lolly/${result.data.createLolly.lollyPath}`)
+            
+            console.log(result)
         })
-    
-        console.log(result)
+        
+        // console.log(result.data.createLolly.lollPath)
+
     }
 
 
@@ -63,7 +80,7 @@ export default function CreateNew() {
         <div className="container" >
 
             {
-                !loading && !error && <div>{JSON.stringify(data.getLolly)}</div>
+                // !loading && !error && <div>{JSON.stringify(data.getLolly)}</div>
             }
             <Header />
 
