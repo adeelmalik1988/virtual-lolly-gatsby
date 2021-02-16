@@ -1,10 +1,12 @@
 import React, { useEffect } from "react"
 import Header from "../component/Header"
-import { Router } from "@reach/router"
+import { Router, useParams } from "@reach/router"
 import ShowLolly from "../templates/showLolly"
 import Test from "../component/test"
 import gql from "graphql-tag"
-import { useQuery } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
+import { stringify } from "query-string"
+
 
 const GETDATA = gql`
     {    
@@ -18,28 +20,37 @@ const GETDATA = gql`
             lollyPath
         }
     }
+`
+const GETDATABYID = gql`
+
+    query getLollyByPath($path: String!){
+        getLollyByPath(path: $path){
+            recipientName
+            message
+            sender
+            flavourTop
+            flavourMedium
+            flavourBottom
+            lollyPath
+        } 
+    }
+
 
 `
 
 
+export default function Lolly({ location }) {
+
+    const params = useParams()
+    console.log(location)
+    const path = location.pathname.replace("/lolly/", "")
+    console.log(path)
 
 
-export default function Lolly() {
-    const { data, loading, error } = useQuery(GETDATA)
-    
-    // useEffect(
-    //     () => {
-    //         async function fetchData() {
-    //             await refetch()
-    //             console.log(data)
-    //         }
+    //const { data, loading, error} = useQuery(GETDATA)
+    const { data, loading, error } = useQuery(GETDATABYID, { variables: { path } })
 
-    //         fetchData()
-    //     }
-    //      ,[]
-    // )
-
-
+    !loading && console.log(data)
 
     if (error) {
         return (
@@ -47,20 +58,19 @@ export default function Lolly() {
         )
     }
 
-    //refetch()
-    //  window.location.reload()
+
 
     return (
         <div>
 
 
+
             <Router basepath="/lolly">
                 {!loading &&
-                    data.getLolly.map((value, key) => (
-                        <ShowLolly key={key} pageContext={value} path={`/${value.lollyPath}`} />
-
-                    ))
-
+                    data.getLollyByPath.map((value, key) => (
+                         <ShowLolly key={key} pageContext={value} path={`/${value.lollyPath}`} />
+                        
+                            ))
                 }
 
             </Router>
@@ -73,3 +83,5 @@ export default function Lolly() {
 
     )
 }
+
+

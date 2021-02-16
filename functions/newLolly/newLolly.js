@@ -10,7 +10,7 @@ const q = faunadb.query
 const typeDefs = gql`
   type Query {
     getLolly: [Lolly!]
-    lollyByPath(link: String): Lolly
+    getLollyByPath(path: String!): [Lolly!]
   
   }
   type Lolly {
@@ -63,6 +63,37 @@ const resolvers = {
       } catch (err) {
         console.log(err)
       }
+    },
+    getLollyByPath: async (_, {path} )=>{
+      console.log(path)
+
+      const client = new faunadb.Client({
+        secret: process.env.FAUNA
+      })
+
+      try {
+        const result = await client.query(
+          q.Map(
+            q.Paginate(q.Match(q.Index("lolly_by_path"), path )),
+            q.Lambda(x=>(q.Get(x)))
+        ))
+        console.log(result.data)
+        return result.data.map(d => {
+          return {
+            recipientName: d.data.recipientName,
+            message: d.data.message,
+            sender: d.data.sender,
+            flavourTop: d.data.flavourTop,
+            flavourMedium: d.data.flavourMedium,
+            flavourBottom: d.data.flavourBottom,
+            lollyPath: d.data.lollyPath
+          }
+        })
+     
+      } catch (err) {
+        console.log(err)
+      }
+
     }
 
   },
