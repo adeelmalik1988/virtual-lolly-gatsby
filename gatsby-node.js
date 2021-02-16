@@ -22,7 +22,7 @@ exports.createPages = async function ({ graphql, actions }) {
 
       posts.map((post) => {
           actions.createPage({
-              path: `/lolly/${post.lollyPath}`,
+              path: `/${post.lollyPath}`,
               component: require.resolve(`./src/templates/showLolly`),
               context: post,
           });
