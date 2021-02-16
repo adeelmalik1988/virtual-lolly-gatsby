@@ -66,7 +66,7 @@ export default function CreateNew() {
 
             }
         }).then(result => {
-            navigate(`/lolly/${result.data.createLolly.lollyPath}`)
+            navigate(`/${result.data.createLolly.lollyPath}`)
             
             console.log(result)
         })
