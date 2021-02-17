@@ -1,26 +1,23 @@
-import React, { useEffect } from "react"
-import Header from "../component/Header"
-import { Router, useParams } from "@reach/router"
+import React from "react"
+import { Router } from "@reach/router"
 import ShowLolly from "../templates/showLolly"
-import Test from "../component/test"
 import gql from "graphql-tag"
-import { useMutation, useQuery } from "@apollo/client"
-import { stringify } from "query-string"
+import { useQuery } from "@apollo/client"
 
 
-const GETDATA = gql`
-    {    
-        getLolly{
-            recipientName
-            message
-            sender
-            flavourTop
-            flavourMedium
-            flavourBottom
-            lollyPath
-        }
-    }
-`
+// const GETDATA = gql`
+//     {    
+//         getLolly{
+//             recipientName
+//             message
+//             sender
+//             flavourTop
+//             flavourMedium
+//             flavourBottom
+//             lollyPath
+//         }
+//     }
+// `
 const GETDATABYID = gql`
 
     query getLollyByPath($path: String!){
@@ -41,7 +38,6 @@ const GETDATABYID = gql`
 
 export default function Lolly({ location }) {
 
-    const params = useParams()
     console.log(location)
     const path = location.pathname.replace("/lolly/", "")
     console.log(path)

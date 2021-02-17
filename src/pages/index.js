@@ -21,12 +21,12 @@ export default function Home() {
 
       </div>
 <div>
-  <input  type="button" value="Create New Lolly" onClick={
+  <button onClick={
     ()=>{
       console.log("create new lolly")
       navigate("/createNew")
     }
-  } />
+  } >  Make a new Lolly to send a Friend </button>
 </div>
     </div>
 

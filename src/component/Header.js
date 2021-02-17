@@ -1,13 +1,15 @@
+import { Link } from "@reach/router"
 import React from "react"
-
 
 export default function Header() {
     return (
-        <div>
-            <h1>
+        <div >
+            <Link to="/" > 
+            <h1 >
                 virutal lollipop
-        </h1>
-            <p>because we all know someone who deserves some sugar</p>
+            </h1>
+                </Link>
+            <p className="subtitle" > because we all know someone who deserves some sugar</p>
 
 
         </div>

@@ -1,23 +1,21 @@
-import { useQuery, gql, useMutation } from "@apollo/client"
-import { navigate, Router } from "@reach/router"
+import { gql, useMutation } from "@apollo/client"
+import { navigate } from "@reach/router"
 import React, { useRef, useState } from "react"
-import { render } from "react-dom"
 import Header from "../component/Header"
 import Lolly from "../component/Lolly"
-import ShowLolly from "../templates/showLolly"
 
 
 
 
-const GETDATA = gql`
-    {    
-        getLolly{
-            message
-            lollyPath
-        }
-    }
+// const GETDATA = gql`
+//     {    
+//         getLolly{
+//             message
+//             lollyPath
+//         }
+//     }
 
-`
+// `
 const CREATELOLLYMUTATION = gql`
     mutation createLolly($recipientName: String!, $message: String!, $sender: String!, $flavourTop: String!, $flavourMedium: String!, $flavourBottom: String!){
       createLolly(recipientName: $recipientName, message: $message, sender: $sender, flavourTop: $flavourTop, flavourMedium: $flavourMedium, flavourBottom: $flavourBottom) {
@@ -42,9 +40,9 @@ export default function CreateNew() {
     const recipientNameRef = useRef()
     const messageRef = useRef()
     const senderRef = useRef()
-    const { loading, error, data } = useQuery(GETDATA)
+    //const { loading, error, data } = useQuery(GETDATA)
     const [createLolly] = useMutation(CREATELOLLYMUTATION)
-    !loading && console.log(data)
+    //!loading && console.log(data)
 
 
     const submitLollyForm = async () => {
@@ -55,7 +53,7 @@ export default function CreateNew() {
         console.log("recipientName :", recipientNameRef.current.value)
         console.log("message :", messageRef.current.value)
         console.log("sender", senderRef.current.value)
-        const result = await createLolly({
+        await createLolly({
             variables: {
                 recipientName: recipientNameRef.current.value,
                 message: messageRef.current.value,
@@ -84,9 +82,6 @@ export default function CreateNew() {
             }
             <Header />
 
-            <h1>
-                Create new lollipop
-        </h1>
             <div className="lollyFormDiv" >
 
                 <div>
@@ -134,7 +129,8 @@ export default function CreateNew() {
                         From
                     </label>
                     <input type="text" name="sender" id="sender" ref={senderRef} />
-                    <input type="button" value="create" onClick={submitLollyForm} />
+                    <br />
+                    <button onClick={submitLollyForm}>Freeze this Lolly and get a Link</button>
                 </div>
 
             </div>

@@ -15,18 +15,24 @@ export default function ShowLolly({ pageContext, location }) {
         <div>
             <Header />
 
-        <div className="showLollyDiv" >
-            <Lolly fillLollyTop={showLollyData.flavourTop} fillLollyMiddle={showLollyData.flavourMedium} fillLollyBottom={showLollyData.flavourBottom} />
-            <div>
-                <h2>{`${origin}/${showLollyData.lollyPath}`}</h2>
-                <h2>{ showLollyData.recipientName }</h2>
-                <h2>{ showLollyData.message }</h2>
-                <h2>{ showLollyData.sender }</h2>
+            <div className="showLollyDiv" >
+                <Lolly fillLollyTop={showLollyData.flavourTop} fillLollyMiddle={showLollyData.flavourMedium} fillLollyBottom={showLollyData.flavourBottom} />
+                <div className="info" >
+                    <p className="share" >Your Lolly is freezing. Share it with this link:</p>
+                    <pre>{`${origin}/${showLollyData.lollyPath}`}</pre>
+                    <br />
+                    <div className="details" >
+
+                        <p className="recipient" >{showLollyData.recipientName}</p>
+                        <div className="message" >{showLollyData.message}</div>
+                        <p className="from" >{showLollyData.sender}</p>
+
+                    </div>
+
+                </div>
+
 
             </div>
-            
-
-        </div>
 
         </div>
     )
