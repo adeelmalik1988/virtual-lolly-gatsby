@@ -113,15 +113,16 @@ const resolvers = {
             data: args
           })
         )
-        // Calling Netlify Webhook to trigger build
-        axios.post("https://api.netlify.com/build_hooks/60241a0e5db2b10c964b2def", {})
-          .then(res => {
-            console.log(`statusCode, ${res.statusCode}`)
-            console.log(res)
-          })
-          .catch(err => {
-            console.log(err)
-          })
+        // Calling Netlify Webhook to trigger build. It is disabled manually. This Post request can be enabled for testing purpose otherwise it will cost build resources on Netllify
+        
+        // axios.post("https://api.netlify.com/build_hooks/60241a0e5db2b10c964b2def", {})
+        //   .then(res => {
+        //     console.log(`statusCode, ${res.statusCode}`)
+        //     console.log(res)
+        //   })
+        //   .catch(err => {
+        //     console.log(err)
+        //   })
         //
 
 
